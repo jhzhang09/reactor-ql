@@ -613,7 +613,7 @@ public class DefaultReactorQL implements ReactorQL {
                 flatMapper = flatMapper.andThen(flux -> flatMapperFunction.apply(alias, flux));
             }
         }
-        return flatMapper;
+        return flatMapper == null ? mapper :flatMapper.andThen(mapper);
     }
 
     private BiFunction<ReactorQLContext, Flux<ReactorQLRecord>, Flux<ReactorQLRecord>> createLimit() {
